@@ -8,13 +8,13 @@
   <div class="container">
     <div class="d-flex align-items-center gap-2 mb-2">
       <a href="{% url 'transport:home' %}" class="text-white-50 text-decoration-none small">
-        <i class="bi bi-house me-1"></i>Home
+        <i class="bi bi-house me-1"></i><span data-en="Home" data-az="Ana Səhifə">Home</span>
       </a>
       <i class="bi bi-chevron-right text-white-50 small"></i>
-      <span class="text-white small">Routes</span>
+      <span class="text-white small" data-en="Routes" data-az="Marşrutlar">Routes</span>
     </div>
-    <h1 class="text-white mb-1"><i class="bi bi-signpost-2 me-2"></i>Bus Routes</h1>
-    <p class="text-white-50 mb-0">Browse all active routes in Baku</p>
+    <h1 class="text-white mb-1"><i class="bi bi-signpost-2 me-2"></i><span data-en="Bus Routes" data-az="Avtobus Marşrutları">Bus Routes</span></h1>
+    <p class="text-white-50 mb-0" data-en="Browse all active routes in Baku" data-az="Bakıdakı bütün aktiv marşrurlara baxın">Browse all active routes in Baku</p>
   </div>
 </div>
 
@@ -25,17 +25,18 @@
     <div class="card-body">
       <form method="get" class="row g-2 align-items-end">
         <div class="col-sm">
-          <label class="form-label small text-muted mb-1">Search routes</label>
+          <label class="form-label small text-muted mb-1" data-en="Search routes" data-az="Marşrut axtar">Search routes</label>
           <div class="input-group">
             <span class="input-group-text bg-transparent"><i class="bi bi-search"></i></span>
             <input type="text" name="q" value="{{ query }}" class="form-control"
+                   data-placeholder-en="Route number or name…" data-placeholder-az="Marşrut nömrəsi və ya adı…"
                    placeholder="Route number or name…">
           </div>
         </div>
         <div class="col-sm-auto">
-          <label class="form-label small text-muted mb-1">Type</label>
+          <label class="form-label small text-muted mb-1" data-en="Type" data-az="Növ">Type</label>
           <select name="type" class="form-select">
-            <option value="">All Types</option>
+            <option value="" data-en="All Types" data-az="Bütün Növlər">All Types</option>
             {% for val, label in route_type_choices %}
             <option value="{{ val }}" {% if route_type == val %}selected{% endif %}>{{ label }}</option>
             {% endfor %}
@@ -43,7 +44,7 @@
         </div>
         <div class="col-sm-auto">
           <button type="submit" class="btn btn-primary">
-            <i class="bi bi-funnel me-1"></i>Filter
+            <i class="bi bi-funnel me-1"></i><span data-en="Filter" data-az="Filtr">Filter</span>
           </button>
           {% if query or route_type %}
           <a href="{% url 'transport:route_list' %}" class="btn btn-outline-secondary ms-1">
@@ -101,9 +102,9 @@
   {% else %}
   <div class="empty-state">
     <div class="empty-state-icon"><i class="bi bi-signpost-2"></i></div>
-    <h5 class="fw-600">No routes found</h5>
-    <p class="text-muted">Try adjusting your search query or filters.</p>
-    <a href="{% url 'transport:route_list' %}" class="btn btn-outline-primary">Clear Filters</a>
+    <h5 class="fw-600" data-en="No routes found" data-az="Marşrut tapılmadı">No routes found</h5>
+    <p class="text-muted" data-en="Try adjusting your search query or filters." data-az="Axtarış sorqunuzu və ya filtrləri dəyişdirin.">Try adjusting your search query or filters.</p>
+    <a href="{% url 'transport:route_list' %}" class="btn btn-outline-primary" data-en="Clear Filters" data-az="Filtrləri Təmizlə">Clear Filters</a>
   </div>
   {% endif %}
 

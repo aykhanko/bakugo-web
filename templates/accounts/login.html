@@ -15,8 +15,8 @@
             <span style="font-size:1.5rem;font-weight:800;color:var(--primary-dark)">Baku<span style="color:var(--primary)">Go</span></span>
           </div>
         </a>
-        <h4 class="fw-700 mb-1">Welcome back</h4>
-        <p class="text-muted small">Sign in to access your saved routes and stops.</p>
+        <h4 class="fw-700 mb-1" data-en="Welcome back" data-az="Xoş gəldiniz">Welcome back</h4>
+        <p class="text-muted small" data-en="Sign in to access your saved routes and stops." data-az="Saxlanmış marşrut və dayanacaqlarınıza daxil olmaq üçün giriş edin.">Sign in to access your saved routes and stops.</p>
       </div>
 
       {% if form.non_field_errors %}
@@ -28,28 +28,28 @@
       <form method="post">
         {% csrf_token %}
         <div class="mb-3">
-          <label class="form-label">Username</label>
+          <label class="form-label" data-en="Username" data-az="İstifadəçi adı">Username</label>
           {{ form.username }}
           {% if form.username.errors %}
           <div class="text-danger small mt-1">{{ form.username.errors.0 }}</div>
           {% endif %}
         </div>
         <div class="mb-4">
-          <label class="form-label">Password</label>
+          <label class="form-label" data-en="Password" data-az="Şifrə">Password</label>
           {{ form.password }}
           {% if form.password.errors %}
           <div class="text-danger small mt-1">{{ form.password.errors.0 }}</div>
           {% endif %}
         </div>
         <button type="submit" class="btn btn-primary w-100 py-2">
-          <i class="bi bi-box-arrow-in-right me-2"></i>Sign In
+          <i class="bi bi-box-arrow-in-right me-2"></i><span data-en="Sign In" data-az="Daxil ol">Sign In</span>
         </button>
       </form>
 
       <hr class="my-3">
       <p class="text-center text-muted small mb-0">
-        Don't have an account?
-        <a href="{% url 'accounts:register' %}" class="fw-600">Create one free</a>
+        <span data-en="Don't have an account?" data-az="Hesabınız yoxdur?">Don't have an account?</span>
+        <a href="{% url 'accounts:register' %}" class="fw-600" data-en="Create one free" data-az="Pulsuz yaratın">Create one free</a>
       </p>
     </div>
   </div>

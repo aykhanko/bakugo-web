@@ -20,28 +20,35 @@
         <li class="nav-item">
           <a class="nav-link {% if request.resolver_match.url_name == 'route_list' %}active{% endif %}"
              href="{% url 'transport:route_list' %}">
-            <i class="bi bi-signpost-2 me-1"></i>Routes
+            <i class="bi bi-signpost-2 me-1"></i><span data-en="Routes" data-az="Marşrutlar">Routes</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link {% if request.resolver_match.url_name == 'stop_list' %}active{% endif %}"
              href="{% url 'transport:stop_list' %}">
-            <i class="bi bi-geo-alt me-1"></i>Stops
+            <i class="bi bi-geo-alt me-1"></i><span data-en="Stops" data-az="Dayanacaqlar">Stops</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link {% if request.resolver_match.url_name == 'route_planner' %}active{% endif %}"
              href="{% url 'transport:route_planner' %}">
-            <i class="bi bi-map me-1"></i>Planner
+            <i class="bi bi-map me-1"></i><span data-en="Planner" data-az="Planlayıcı">Planner</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link {% if request.resolver_match.url_name == 'map_view' %}active{% endif %}"
              href="{% url 'transport:map_view' %}">
-            <i class="bi bi-pin-map me-1"></i>Live Map
+            <i class="bi bi-pin-map me-1"></i><span data-en="Live Map" data-az="Canlı Xəritə">Live Map</span>
           </a>
         </li>
       </ul>
+
+      <!-- Language Switcher -->
+      <div class="d-flex align-items-center gap-1 me-2">
+        <button type="button" class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+        <span class="text-white-50 small">|</span>
+        <button type="button" class="lang-btn" data-lang="az" onclick="setLang('az')">AZ</button>
+      </div>
 
       <!-- Auth buttons -->
       <div class="d-flex align-items-center gap-2">
@@ -53,15 +60,15 @@
           <form method="post" action="{% url 'accounts:logout' %}" class="m-0">
             {% csrf_token %}
             <button type="submit" class="btn btn-outline-light btn-sm">
-              <i class="bi bi-box-arrow-right me-1"></i>Logout
+              <i class="bi bi-box-arrow-right me-1"></i><span data-en="Logout" data-az="Çıxış">Logout</span>
             </button>
           </form>
         {% else %}
           <a href="{% url 'accounts:login' %}" class="btn btn-outline-light btn-sm">
-            <i class="bi bi-person me-1"></i>Login
+            <i class="bi bi-person me-1"></i><span data-en="Login" data-az="Daxil ol">Login</span>
           </a>
           <a href="{% url 'accounts:register' %}" class="btn btn-light btn-sm text-primary fw-semibold">
-            <i class="bi bi-person-plus me-1"></i>Register
+            <i class="bi bi-person-plus me-1"></i><span data-en="Register" data-az="Qeydiyyat">Register</span>
           </a>
         {% endif %}
       </div>

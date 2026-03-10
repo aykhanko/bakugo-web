@@ -15,8 +15,8 @@
             <span style="font-size:1.5rem;font-weight:800;color:var(--primary-dark)">Baku<span style="color:var(--primary)">Go</span></span>
           </div>
         </a>
-        <h4 class="fw-700 mb-1">Create your account</h4>
-        <p class="text-muted small">Join BakuGo to save routes and personalise your experience.</p>
+        <h4 class="fw-700 mb-1" data-en="Create your account" data-az="Hesabınızı yaratın">Create your account</h4>
+        <p class="text-muted small" data-en="Join BakuGo to save routes and personalise your experience." data-az="Marşrutları yadda saxlamaq və təcrübənizi fərdiləşdirmək üçün BakuGo-ya qoşuln.">Join BakuGo to save routes and personalise your experience.</p>
       </div>
 
       {% if form.non_field_errors %}
@@ -29,36 +29,36 @@
         {% csrf_token %}
         <div class="row g-3">
           <div class="col-sm-6">
-            <label class="form-label">First Name</label>
+            <label class="form-label" data-en="First Name" data-az="Ad">First Name</label>
             {{ form.first_name }}
           </div>
           <div class="col-sm-6">
-            <label class="form-label">Last Name</label>
+            <label class="form-label" data-en="Last Name" data-az="Soyad">Last Name</label>
             {{ form.last_name }}
           </div>
           <div class="col-12">
-            <label class="form-label">Username *</label>
+            <label class="form-label" data-en="Username *" data-az="İstifadəçi adı *">Username *</label>
             {{ form.username }}
             {% if form.username.errors %}
             <div class="text-danger small mt-1">{{ form.username.errors.0 }}</div>
             {% endif %}
           </div>
           <div class="col-12">
-            <label class="form-label">Email *</label>
+            <label class="form-label" data-en="Email *" data-az="E-poçt *">Email *</label>
             {{ form.email }}
             {% if form.email.errors %}
             <div class="text-danger small mt-1">{{ form.email.errors.0 }}</div>
             {% endif %}
           </div>
           <div class="col-12">
-            <label class="form-label">Password *</label>
+            <label class="form-label" data-en="Password *" data-az="Şifrə *">Password *</label>
             {{ form.password1 }}
             {% if form.password1.errors %}
             <div class="text-danger small mt-1">{{ form.password1.errors.0 }}</div>
             {% endif %}
           </div>
           <div class="col-12">
-            <label class="form-label">Confirm Password *</label>
+            <label class="form-label" data-en="Confirm Password *" data-az="Şifrəni təsdiqlə *">Confirm Password *</label>
             {{ form.password2 }}
             {% if form.password2.errors %}
             <div class="text-danger small mt-1">{{ form.password2.errors.0 }}</div>
@@ -66,7 +66,7 @@
           </div>
           <div class="col-12">
             <button type="submit" class="btn btn-primary w-100 py-2">
-              <i class="bi bi-person-plus me-2"></i>Create Account
+              <i class="bi bi-person-plus me-2"></i><span data-en="Create Account" data-az="Hesab Yarat">Create Account</span>
             </button>
           </div>
         </div>
@@ -74,8 +74,8 @@
 
       <hr class="my-3">
       <p class="text-center text-muted small mb-0">
-        Already have an account?
-        <a href="{% url 'accounts:login' %}" class="fw-600">Sign in</a>
+        <span data-en="Already have an account?" data-az="Artıq hesabınız var?">Already have an account?</span>
+        <a href="{% url 'accounts:login' %}" class="fw-600" data-en="Sign in" data-az="Daxil ol">Sign in</a>
       </p>
     </div>
   </div>

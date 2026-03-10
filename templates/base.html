@@ -42,5 +42,38 @@
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   {% block extra_js %}{% endblock %}
+
+  <!-- Language switcher -->
+  <script>
+  (function () {
+    var KEY = 'bakugo_lang';
+    var lang = localStorage.getItem(KEY) || 'en';
+
+    function applyLang(l) {
+      document.documentElement.setAttribute('lang', l);
+      /* translate all elements that carry data-en / data-az */
+      document.querySelectorAll('[data-en][data-az]').forEach(function (el) {
+        var val = el.getAttribute('data-' + l);
+        if (val !== null) el.innerHTML = val;
+      });
+      /* sync placeholder text */
+      document.querySelectorAll('[data-placeholder-en][data-placeholder-az]').forEach(function (el) {
+        var val = el.getAttribute('data-placeholder-' + l);
+        if (val !== null) el.placeholder = val;
+      });
+      /* sync form labels stored on <label> via data-for-* */
+      document.querySelectorAll('.lang-btn').forEach(function (btn) {
+        btn.classList.toggle('lang-active', btn.dataset.lang === l);
+      });
+    }
+
+    window.setLang = function (l) {
+      localStorage.setItem(KEY, l);
+      applyLang(l);
+    };
+
+    document.addEventListener('DOMContentLoaded', function () { applyLang(lang); });
+  })();
+  </script>
 </body>
 </html>

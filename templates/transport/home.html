@@ -12,13 +12,13 @@
     <div class="row align-items-center g-5">
       <div class="col-lg-7">
         <span class="hero-badge mb-3">
-          <i class="bi bi-lightning-fill"></i> Baku's Transport Companion
+          <i class="bi bi-lightning-fill"></i> <span data-en="Baku's Transport Companion" data-az="Bakı Nəqliyyat Köməkçisi">Baku's Transport Companion</span>
         </span>
         <h1 class="hero-title mt-3 mb-4">
-          Navigate Baku<br>
-          <span class="text-highlight">Smarter & Faster</span>
+          <span data-en="Navigate Baku" data-az="Bakıda Hərəkət Et">Navigate Baku</span><br>
+          <span class="text-highlight" data-en="Smarter &amp; Faster" data-az="Daha Aqıllı və Sürətli">Smarter &amp; Faster</span>
         </h1>
-        <p class="hero-subtitle mb-4">
+        <p class="hero-subtitle mb-4" data-en="Find bus routes, locate stops, track vehicle positions in near real-time, and plan your journey across Baku&#39;s public transport network &mdash; all in one place." data-az="Avtobus marşrutlarını tapın, dayanacaqları müəyyənləşdirin, nəqliyyat mövqelərini izləyin və Bakının ictimai nəqliyyat şəbəkəsindən istifadə edərək səyahətinizi planlayın &mdash; hamısı bir yerdə.">
           Find bus routes, locate stops, track vehicle positions in near real-time,
           and plan your journey across Baku's public transport network — all in one place.
         </p>
@@ -32,7 +32,9 @@
                   <span class="input-group-text border-0 bg-transparent ps-0 text-success">
                     <i class="bi bi-circle-fill fs-6"></i>
                   </span>
-                  <input type="text" name="origin" class="form-control border-0 ps-1" placeholder="From — origin stop or area"
+                  <input type="text" name="origin" class="form-control border-0 ps-1"
+                         data-placeholder-en="From — origin stop or area" data-placeholder-az="Haradan — başlanqıc dayanacaq"
+                         placeholder="From — origin stop or area"
                          style="font-size:.95rem; box-shadow:none; background:transparent;">
                 </div>
               </div>
@@ -41,13 +43,15 @@
                   <span class="input-group-text border-0 bg-transparent ps-0 text-danger">
                     <i class="bi bi-geo-alt-fill fs-6"></i>
                   </span>
-                  <input type="text" name="destination" class="form-control border-0 ps-1" placeholder="To — destination area"
+                  <input type="text" name="destination" class="form-control border-0 ps-1"
+                         data-placeholder-en="To — destination area" data-placeholder-az="Haraya — mənzil"
+                         placeholder="To — destination area"
                          style="font-size:.95rem; box-shadow:none; background:transparent;">
                 </div>
               </div>
               <div class="col-12 col-sm-auto">
                 <button type="submit" class="btn btn-primary w-100 px-4">
-                  <i class="bi bi-arrow-right me-1"></i>Plan
+                  <i class="bi bi-arrow-right me-1"></i><span data-en="Plan" data-az="Planla">Plan</span>
                 </button>
               </div>
             </div>
@@ -57,13 +61,13 @@
         <!-- CTAs -->
         <div class="d-flex flex-wrap gap-2">
           <a href="{% url 'transport:route_list' %}" class="btn btn-light text-primary fw-semibold">
-            <i class="bi bi-signpost-2 me-1"></i>Explore Routes
+            <i class="bi bi-signpost-2 me-1"></i><span data-en="Explore Routes" data-az="Marşrutarı Kəşfet">Explore Routes</span>
           </a>
           <a href="{% url 'transport:stop_list' %}" class="btn btn-outline-light">
-            <i class="bi bi-geo-alt me-1"></i>View Stops
+            <i class="bi bi-geo-alt me-1"></i><span data-en="View Stops" data-az="Dayanacaqları Gör">View Stops</span>
           </a>
           <a href="{% url 'transport:map_view' %}" class="btn btn-outline-light">
-            <i class="bi bi-pin-map me-1"></i>Live Map
+            <i class="bi bi-pin-map me-1"></i><span data-en="Live Map" data-az="Canlı Xəritə">Live Map</span>
           </a>
         </div>
       </div>
@@ -77,7 +81,7 @@
             </div>
             <div>
               <div class="fs-4 fw-800 text-primary">{{ stats.routes }}+</div>
-              <div class="small text-muted">Active Routes</div>
+              <div class="small text-muted" data-en="Active Routes" data-az="Aktiv Marşrutlar">Active Routes</div>
             </div>
           </div>
           <div class="card border-0 shadow-lg p-3 d-flex flex-row align-items-center gap-3" style="max-width:280px; margin:0 auto; margin-left:3rem;">
@@ -86,7 +90,7 @@
             </div>
             <div>
               <div class="fs-4 fw-800" style="color:var(--success)">{{ stats.stops }}+</div>
-              <div class="small text-muted">Bus Stops</div>
+              <div class="small text-muted" data-en="Bus Stops" data-az="Avtobus Dayanacaqları">Bus Stops</div>
             </div>
           </div>
           <div class="card border-0 shadow-lg p-3 d-flex flex-row align-items-center gap-3" style="max-width:280px; margin:0 auto;">
@@ -95,7 +99,7 @@
             </div>
             <div>
               <div class="fs-4 fw-800" style="color:var(--accent)">{{ stats.vehicles }}+</div>
-              <div class="small text-muted">Vehicles Tracked</div>
+              <div class="small text-muted" data-en="Vehicles Tracked" data-az="İzlənən Nəqliyyat">Vehicles Tracked</div>
             </div>
           </div>
         </div>
@@ -107,15 +111,15 @@
       <div class="d-flex justify-content-center gap-4">
         <div class="hero-stat">
           <div class="hero-stat-number">{{ stats.routes }}+</div>
-          <div class="hero-stat-label">Routes</div>
+          <div class="hero-stat-label" data-en="Routes" data-az="Marşrutlar">Routes</div>
         </div>
         <div class="hero-stat">
           <div class="hero-stat-number">{{ stats.stops }}+</div>
-          <div class="hero-stat-label">Stops</div>
+          <div class="hero-stat-label" data-en="Stops" data-az="Dayanacaqlar">Stops</div>
         </div>
         <div class="hero-stat">
           <div class="hero-stat-number">{{ stats.vehicles }}+</div>
-          <div class="hero-stat-label">Vehicles</div>
+          <div class="hero-stat-label" data-en="Vehicles" data-az="Nəqliyyat">Vehicles</div>
         </div>
       </div>
     </div>
@@ -126,9 +130,9 @@
 <section class="py-6 py-md-7" style="padding: 5rem 0;">
   <div class="container">
     <div class="text-center mb-5">
-      <span class="section-label">What We Offer</span>
-      <h2 class="section-title mt-2 mb-3">Everything You Need to Travel Smart</h2>
-      <p class="section-subtitle">BakuGo puts the full power of Baku's transport network at your fingertips.</p>
+      <span class="section-label" data-en="What We Offer" data-az="Nə Təklif Edirik">What We Offer</span>
+      <h2 class="section-title mt-2 mb-3" data-en="Everything You Need to Travel Smart" data-az="Aqıllı Səyahət üçün Lazım Olan Hər Şəy">Everything You Need to Travel Smart</h2>
+      <p class="section-subtitle" data-en="BakuGo puts the full power of Baku&#39;s transport network at your fingertips." data-az="BakuGo Bakı nəqliyyat şəbəkəsinin tam güccünü barmaqlarınızın ucuna qoyur.">BakuGo puts the full power of Baku's transport network at your fingertips.</p>
     </div>
 
     <div class="row g-4">
@@ -137,10 +141,10 @@
           <div class="feature-icon-wrap bg-primary-soft">
             <i class="bi bi-signpost-2-fill"></i>
           </div>
-          <h5 class="fw-700 mb-2">Route Explorer</h5>
-          <p class="text-muted small mb-3">Browse all active bus routes with detailed stop information and schedules.</p>
+          <h5 class="fw-700 mb-2" data-en="Route Explorer" data-az="Marşrut Tədqiqatçısı">Route Explorer</h5>
+          <p class="text-muted small mb-3" data-en="Browse all active bus routes with detailed stop information and schedules." data-az="Bütün aktiv avtobus marşrutlarını ətraflı dayanacaq məlumatları ilə nəzərdən keçirin.">Browse all active bus routes with detailed stop information and schedules.</p>
           <a href="{% url 'transport:route_list' %}" class="btn btn-outline-primary btn-sm mt-auto">
-            Explore Routes <i class="bi bi-arrow-right ms-1"></i>
+            <span data-en="Explore Routes" data-az="Marşrutarı Kəşfet">Explore Routes</span> <i class="bi bi-arrow-right ms-1"></i>
           </a>
         </div>
       </div>
@@ -150,10 +154,10 @@
           <div class="feature-icon-wrap bg-success-soft">
             <i class="bi bi-geo-alt-fill"></i>
           </div>
-          <h5 class="fw-700 mb-2">Stop Finder</h5>
-          <p class="text-muted small mb-3">Locate bus stops near you. View which routes serve each stop in real time.</p>
+          <h5 class="fw-700 mb-2" data-en="Stop Finder" data-az="Dayanacaq Tapıcı">Stop Finder</h5>
+          <p class="text-muted small mb-3" data-en="Locate bus stops near you. View which routes serve each stop in real time." data-az="Yaxınlıqınızda avtobus dayanacaqlarını tapın. Hər dayanacağa hansı marşrutların xidmət etdiyini görün.">Locate bus stops near you. View which routes serve each stop in real time.</p>
           <a href="{% url 'transport:stop_list' %}" class="btn btn-outline-primary btn-sm mt-auto">
-            Find Stops <i class="bi bi-arrow-right ms-1"></i>
+            <span data-en="Find Stops" data-az="Dayanacaqları Tap">Find Stops</span> <i class="bi bi-arrow-right ms-1"></i>
           </a>
         </div>
       </div>
@@ -163,10 +167,10 @@
           <div class="feature-icon-wrap bg-warning-soft">
             <i class="bi bi-map-fill"></i>
           </div>
-          <h5 class="fw-700 mb-2">Route Planner</h5>
-          <p class="text-muted small mb-3">Enter your origin and destination to get the best route suggestion instantly.</p>
+          <h5 class="fw-700 mb-2" data-en="Route Planner" data-az="Marşrut Planlayıcı">Route Planner</h5>
+          <p class="text-muted small mb-3" data-en="Enter your origin and destination to get the best route suggestion instantly." data-az="Ən yaxşı marşrut tövsiyasını almaq üçün başlanqıc və son nöqtənizi daxil edin.">Enter your origin and destination to get the best route suggestion instantly.</p>
           <a href="{% url 'transport:route_planner' %}" class="btn btn-outline-primary btn-sm mt-auto">
-            Plan Journey <i class="bi bi-arrow-right ms-1"></i>
+            <span data-en="Plan Journey" data-az="Səyahəti Planla">Plan Journey</span> <i class="bi bi-arrow-right ms-1"></i>
           </a>
         </div>
       </div>
@@ -176,10 +180,10 @@
           <div class="feature-icon-wrap bg-danger-soft">
             <i class="bi bi-bus-front-fill"></i>
           </div>
-          <h5 class="fw-700 mb-2">Live Vehicle Map</h5>
-          <p class="text-muted small mb-3">Track bus positions on an interactive map. See where your bus is right now.</p>
+          <h5 class="fw-700 mb-2" data-en="Live Vehicle Map" data-az="Canlı Nəqliyyat Xəritəsi">Live Vehicle Map</h5>
+          <p class="text-muted small mb-3" data-en="Track bus positions on an interactive map. See where your bus is right now." data-az="Avtobus mövqelərini interaktiv xəritədə izləyin. Avtobusnuzun indi harada olduğunu görün.">Track bus positions on an interactive map. See where your bus is right now.</p>
           <a href="{% url 'transport:map_view' %}" class="btn btn-outline-primary btn-sm mt-auto">
-            Open Map <i class="bi bi-arrow-right ms-1"></i>
+            <span data-en="Open Map" data-az="Xəritəni Aç">Open Map</span> <i class="bi bi-arrow-right ms-1"></i>
           </a>
         </div>
       </div>
@@ -192,11 +196,11 @@
   <div class="container">
     <div class="d-flex justify-content-between align-items-end mb-4">
       <div>
-        <span class="section-label">Routes</span>
-        <h2 class="section-title mt-1 mb-0">Popular Routes</h2>
+        <span class="section-label" data-en="Routes" data-az="Marşrutlar">Routes</span>
+        <h2 class="section-title mt-1 mb-0" data-en="Popular Routes" data-az="Populyar Marşrutlar">Popular Routes</h2>
       </div>
       <a href="{% url 'transport:route_list' %}" class="btn btn-outline-primary btn-sm">
-        View All <i class="bi bi-arrow-right ms-1"></i>
+        <span data-en="View All" data-az="Hamısını Gör">View All</span> <i class="bi bi-arrow-right ms-1"></i>
       </a>
     </div>
 
@@ -231,7 +235,7 @@
       <div class="col-12">
         <div class="empty-state">
           <div class="empty-state-icon"><i class="bi bi-signpost-2"></i></div>
-          <p class="text-muted">No routes available yet.</p>
+          <p class="text-muted" data-en="No routes available yet." data-az="Hələ marşrut yoxdur.">No routes available yet.</p>
         </div>
       </div>
       {% endfor %}
@@ -243,9 +247,9 @@
 <section style="padding: 5rem 0;">
   <div class="container">
     <div class="text-center mb-5">
-      <span class="section-label">Simple & Fast</span>
-      <h2 class="section-title mt-2 mb-3">How BakuGo Works</h2>
-      <p class="section-subtitle">Planning your commute has never been easier.</p>
+      <span class="section-label" data-en="Simple &amp; Fast" data-az="Sadə və Sürətli">Simple &amp; Fast</span>
+      <h2 class="section-title mt-2 mb-3" data-en="How BakuGo Works" data-az="BakuGo Necə İşləyir">How BakuGo Works</h2>
+      <p class="section-subtitle" data-en="Planning your commute has never been easier." data-az="Gediş-gəlişinizi planlamaq heç vaxt bu qədər asan olmamışdı.">Planning your commute has never been easier.</p>
     </div>
 
     <div class="row g-4 align-items-start">
@@ -253,8 +257,8 @@
         <div class="d-flex gap-3">
           <div class="step-number flex-shrink-0">1</div>
           <div>
-            <h5 class="fw-700 mb-2">Enter Your Journey</h5>
-            <p class="text-muted small">Type your starting point and destination in the route planner. BakuGo searches all available routes instantly.</p>
+            <h5 class="fw-700 mb-2" data-en="Enter Your Journey" data-az="Səyahətinizi Daxil Edin">Enter Your Journey</h5>
+            <p class="text-muted small" data-en="Type your starting point and destination in the route planner. BakuGo searches all available routes instantly." data-az="Marşrut planlayıcısında başlanqıc və son nöqtənizi yazın. BakuGo bütün mövcüud marşrutları dərhal axtarır.">Type your starting point and destination in the route planner. BakuGo searches all available routes instantly.</p>
           </div>
         </div>
       </div>
@@ -262,8 +266,8 @@
         <div class="d-flex gap-3">
           <div class="step-number flex-shrink-0">2</div>
           <div>
-            <h5 class="fw-700 mb-2">Get Route Suggestions</h5>
-            <p class="text-muted small">See direct routes and transfer options ranked by travel time. Pick the best one for you.</p>
+            <h5 class="fw-700 mb-2" data-en="Get Route Suggestions" data-az="Marşrut Tövsiyaləri Alın">Get Route Suggestions</h5>
+            <p class="text-muted small" data-en="See direct routes and transfer options ranked by travel time. Pick the best one for you." data-az="Yolculuq müdətinə görə sıralanmış birbaşa marşrutları və aktarma seçimlərini görün. Sizin üçün ən yaxsını seçin.">See direct routes and transfer options ranked by travel time. Pick the best one for you.</p>
           </div>
         </div>
       </div>
@@ -271,8 +275,9 @@
         <div class="d-flex gap-3">
           <div class="step-number flex-shrink-0">3</div>
           <div>
-            <h5 class="fw-700 mb-2">Track & Travel</h5>
-            <p class="text-muted small">Open the Live Map to see your bus approaching in real-time. Never miss your bus again.</p>
+            <h5 class="fw-700 mb-2" data-en="Track &amp; Travel" data-az="İzlə və Yol Get">
+Track &amp; Travel</h5>
+            <p class="text-muted small" data-en="Open the Live Map to see your bus approaching in real-time. Never miss your bus again." data-az="Avtobusnuzun real vaxtda yaxınlaşdığını görmək üçün Canlı Xəritəni açın. Avtobusunuzu bir daha qaçırmayın.">Open the Live Map to see your bus approaching in real-time. Never miss your bus again.</p>
           </div>
         </div>
       </div>
@@ -285,11 +290,11 @@
   <div class="container">
     <div class="row align-items-center g-5">
       <div class="col-lg-5">
-        <span class="badge bg-white text-primary fw-semibold mb-3">Why BakuGo?</span>
-        <h2 class="text-white fw-800 mb-4" style="font-size: clamp(1.6rem,3vw,2.4rem); letter-spacing:-.5px; line-height:1.2;">
+        <span class="badge bg-white text-primary fw-semibold mb-3" data-en="Why BakuGo?" data-az="Niyə BakuGo?">Why BakuGo?</span>
+        <h2 class="text-white fw-800 mb-4" style="font-size: clamp(1.6rem,3vw,2.4rem); letter-spacing:-.5px; line-height:1.2;" data-en="Built for Baku Commuters, by Baku Commuters" data-az="Bakı Sərnişinləri üçün, Bakı Sərnişinləri tərəfindən">
           Built for Baku Commuters, by Baku Commuters
         </h2>
-        <p class="text-white-50 mb-4">
+        <p class="text-white-50 mb-4" data-en="Tired of waiting without knowing when your bus arrives? BakuGo was designed to solve real problems faced daily by thousands of commuters navigating Baku&#39;s growing city." data-az="Avtobusnuzun nə vaxt gələcəyini bilmədən gözləməkdən bezdiniz? BakuGo, Bakının böyüyən şəhərini gəzən minlərlə sərnişinin hər gün üzləşdiyi real problemləri həll etmək üçün hazırlanmışdır.">
           Tired of waiting without knowing when your bus arrives? BakuGo was designed to solve real problems faced daily by 
           thousands of commuters navigating Baku's growing city.
         </p>
@@ -307,29 +312,29 @@
           <div class="col-6">
             <div class="card border-0 p-3 text-center h-100" style="background:rgba(255,255,255,.08); backdrop-filter:blur(4px);">
               <i class="bi bi-phone fs-2 text-warning mb-2"></i>
-              <div class="text-white fw-600">Mobile First</div>
-              <div class="text-white-50 small">Optimized for phones</div>
+              <div class="text-white fw-600" data-en="Mobile First" data-az="Mobil Öncəlik">Mobile First</div>
+              <div class="text-white-50 small" data-en="Optimized for phones" data-az="Telefonlar üçün optimallaşdırılb">Optimized for phones</div>
             </div>
           </div>
           <div class="col-6">
             <div class="card border-0 p-3 text-center h-100" style="background:rgba(255,255,255,.08); backdrop-filter:blur(4px);">
               <i class="bi bi-lightning-fill fs-2 text-warning mb-2"></i>
-              <div class="text-white fw-600">Fast & Light</div>
-              <div class="text-white-50 small">Works on any connection</div>
+              <div class="text-white fw-600" data-en="Fast &amp; Light" data-az="Sürətli və Yüngül">Fast &amp; Light</div>
+              <div class="text-white-50 small" data-en="Works on any connection" data-az="İstənilən bağlantıda işləyir">Works on any connection</div>
             </div>
           </div>
           <div class="col-6">
             <div class="card border-0 p-3 text-center h-100" style="background:rgba(255,255,255,.08); backdrop-filter:blur(4px);">
               <i class="bi bi-map fs-2 text-warning mb-2"></i>
-              <div class="text-white fw-600">Interactive Maps</div>
-              <div class="text-white-50 small">OpenStreetMap powered</div>
+              <div class="text-white fw-600" data-en="Interactive Maps" data-az="İnteraktiv Xəritələr">Interactive Maps</div>
+              <div class="text-white-50 small" data-en="OpenStreetMap powered" data-az="OpenStreetMap ilə gücləndirilmiş">OpenStreetMap powered</div>
             </div>
           </div>
           <div class="col-6">
             <div class="card border-0 p-3 text-center h-100" style="background:rgba(255,255,255,.08); backdrop-filter:blur(4px);">
               <i class="bi bi-shield-check fs-2 text-warning mb-2"></i>
-              <div class="text-white fw-600">Free to Use</div>
-              <div class="text-white-50 small">No ads, no paywalls</div>
+              <div class="text-white fw-600" data-en="Free to Use" data-az="Ödənişsiz İstifadə">Free to Use</div>
+              <div class="text-white-50 small" data-en="No ads, no paywalls" data-az="Reklam yox, ödəmə divarı yox">No ads, no paywalls</div>
             </div>
           </div>
         </div>
@@ -341,16 +346,16 @@
 <!-- ====== CTA ====== -->
 <section style="padding: 5rem 0;">
   <div class="container text-center">
-    <h2 class="section-title mb-3">Start Your Journey Today</h2>
-    <p class="section-subtitle mb-4">
+    <h2 class="section-title mb-3" data-en="Start Your Journey Today" data-az="Bu Gün Səyahətinizə Başlayın">Start Your Journey Today</h2>
+    <p class="section-subtitle mb-4" data-en="Create a free account to save your favourite routes and stops. Or start exploring right now &mdash; no login required." data-az="Sevimli marşrut və dayanacaqlarınızı saxlamaq üçün pulsuz hesab yarat. Ya da indi kəşfə başlayın &mdash; giriş tələb olunmur.">
       Create a free account to save your favourite routes and stops. Or start exploring right now — no login required.
     </p>
     <div class="d-flex flex-wrap justify-content-center gap-3">
       <a href="{% url 'accounts:register' %}" class="btn btn-primary btn-lg">
-        <i class="bi bi-person-plus me-2"></i>Create Free Account
+        <i class="bi bi-person-plus me-2"></i><span data-en="Create Free Account" data-az="Pulsuz Hesab Yarat">Create Free Account</span>
       </a>
       <a href="{% url 'transport:route_list' %}" class="btn btn-outline-primary btn-lg">
-        <i class="bi bi-signpost-2 me-2"></i>Browse Routes
+        <i class="bi bi-signpost-2 me-2"></i><span data-en="Browse Routes" data-az="Marşrutlara Bax">Browse Routes</span>
       </a>
     </div>
   </div>

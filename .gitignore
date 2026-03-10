@@ -12,3 +12,5 @@ media/*
 *:Zone.Identifier
 *.gz
 *.pyc
+
+*.sh

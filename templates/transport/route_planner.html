@@ -8,12 +8,12 @@
 <div class="page-header">
   <div class="container">
     <div class="d-flex align-items-center gap-2 mb-2">
-      <a href="{% url 'transport:home' %}" class="text-white-50 text-decoration-none small"><i class="bi bi-house me-1"></i>Home</a>
+      <a href="{% url 'transport:home' %}" class="text-white-50 text-decoration-none small"><i class="bi bi-house me-1"></i><span data-en="Home" data-az="Ana Səhifə">Home</span></a>
       <i class="bi bi-chevron-right text-white-50 small"></i>
-      <span class="text-white small">Route Planner</span>
+      <span class="text-white small" data-en="Route Planner" data-az="Marşrut Planlayıcı">Route Planner</span>
     </div>
-    <h1 class="text-white mb-1"><i class="bi bi-map me-2"></i>Route Planner</h1>
-    <p class="text-white-50 mb-0">Find the best bus route between two points in Baku</p>
+    <h1 class="text-white mb-1"><i class="bi bi-map me-2"></i><span data-en="Route Planner" data-az="Marşrut Planlayıcı">Route Planner</span></h1>
+    <p class="text-white-50 mb-0" data-en="Find the best bus route between two points in Baku" data-az="Bakıda iki nöqtə arasında ən yaxşı avtobus marşrutunu tapın">Find the best bus route between two points in Baku</p>
   </div>
 </div>
 
@@ -24,17 +24,18 @@
       <!-- Planner Form -->
       <div class="planner-card mb-4">
         <h5 class="fw-700 mb-4">
-          <i class="bi bi-signpost-split me-2 text-primary"></i>Plan Your Journey
+          <i class="bi bi-signpost-split me-2 text-primary"></i><span data-en="Plan Your Journey" data-az="Səyahətinizi Planla">Plan Your Journey</span>
         </h5>
         <form method="get">
           <div class="mb-3">
             <label class="form-label">
               <span class="d-inline-flex align-items-center gap-1">
                 <i class="bi bi-circle-fill text-success" style="font-size:.6rem;"></i>
-                From (origin stop or area)
+                <span data-en="From (origin stop or area)" data-az="Haradan (başlanqıc dayanacaq və ya ərazi)">From (origin stop or area)</span>
               </span>
             </label>
             <input type="text" name="origin" class="form-control form-control-lg"
+                   data-placeholder-en="e.g. 28 May, Narimanov, Ganjlik…" data-placeholder-az="məs. 28 May, Narimanov, Gənclik…"
                    placeholder="e.g. 28 May, Narimanov, Ganjlik…"
                    value="{{ form.origin.value|default:'' }}">
             {% if form.origin.errors %}
@@ -54,10 +55,11 @@
             <label class="form-label">
               <span class="d-inline-flex align-items-center gap-1">
                 <i class="bi bi-geo-alt-fill text-danger" style="font-size:.75rem;"></i>
-                To (destination stop or area)
+                <span data-en="To (destination stop or area)" data-az="Haraya (son dayanacaq və ya ərazi)">To (destination stop or area)</span>
               </span>
             </label>
             <input type="text" name="destination" class="form-control form-control-lg"
+                   data-placeholder-en="e.g. Hazi Aslanov, Sahil, Memar Ajami…" data-placeholder-az="məs. Həzi Aslanov, Sahil, Memar Ǝcəmi…"
                    placeholder="e.g. Hazi Aslanov, Sahil, Memar Ajami…"
                    value="{{ form.destination.value|default:'' }}">
             {% if form.destination.errors %}
@@ -66,7 +68,7 @@
           </div>
 
           <button type="submit" class="btn btn-primary btn-lg w-100">
-            <i class="bi bi-search me-2"></i>Find Routes
+            <i class="bi bi-search me-2"></i><span data-en="Find Routes" data-az="Marşrut Tap">Find Routes</span>
           </button>
         </form>
       </div>
@@ -77,7 +79,7 @@
         <div class="mb-3">
           <h5 class="fw-700">
             <i class="bi bi-check-circle text-success me-2"></i>
-            Route Suggestions
+            <span data-en="Route Suggestions" data-az="Marşrut Tövsiyaləri">Route Suggestions</span>
             {% if origin_stop and destination_stop %}
             <small class="text-muted fw-normal fs-6">
               {{ origin_stop.name }} → {{ destination_stop.name }}
@@ -93,9 +95,9 @@
               <!-- Badge -->
               <div class="flex-shrink-0">
                 {% if suggestion.type == 'direct' %}
-                <span class="badge bg-success rounded-pill">Direct</span>
+                <span class="badge bg-success rounded-pill" data-en="Direct" data-az="Birbaşa">Direct</span>
                 {% else %}
-                <span class="badge rounded-pill" style="background:var(--accent);">1 Transfer</span>
+                <span class="badge rounded-pill" style="background:var(--accent);" data-en="1 Transfer" data-az="1 Aktarma">1 Transfer</span>
                 {% endif %}
               </div>
 
@@ -148,14 +150,14 @@
                   {% if suggestion.type == 'direct' %}
                   <span class="text-muted small">
                     <i class="bi bi-arrow-right-circle me-1 text-success"></i>
-                    No transfers
+                    <span data-en="No transfers" data-az="Aktarma yoxdur">No transfers</span>
                   </span>
                   {% endif %}
                 </div>
               </div>
 
               <a href="{% url 'transport:route_detail' suggestion.route.pk %}" class="btn btn-outline-primary btn-sm flex-shrink-0">
-                View <i class="bi bi-arrow-right ms-1"></i>
+                <span data-en="View" data-az="Bax">View</span> <i class="bi bi-arrow-right ms-1"></i>
               </a>
             </div>
           </div>
@@ -167,9 +169,8 @@
         <div class="card border-warning">
           <div class="card-body text-center py-5">
             <i class="bi bi-exclamation-triangle text-warning fs-1 mb-3 d-block"></i>
-            <h5 class="fw-700">No Route Found</h5>
-            <p class="text-muted mb-3">
-              We couldn't find a route between those stops.
+            <h5 class="fw-700" data-en="No Route Found" data-az="Marşrut Tapılmadı">No Route Found</h5>
+            <p class="text-muted mb-3" data-en="We couldn't find a route between those stops." data-az="Bu dayanacaqlar arasında marşrut tapılmadı.">
               {% if origin_stop and destination_stop %}
               <br><small>Origin: <strong>{{ origin_stop.name }}</strong> → Destination: <strong>{{ destination_stop.name }}</strong></small>
               {% endif %}
@@ -191,7 +192,7 @@
       <!-- Tips card -->
       <div class="card bg-light border-0 mt-4">
         <div class="card-body">
-          <h6 class="fw-700 mb-3"><i class="bi bi-lightbulb me-2 text-warning"></i>Planning Tips</h6>
+          <h6 class="fw-700 mb-3"><i class="bi bi-lightbulb me-2 text-warning"></i><span data-en="Planning Tips" data-az="Planlama Məsləhətləri">Planning Tips</span></h6>
           <ul class="list-unstyled small text-muted mb-0">
             <li class="mb-2"><i class="bi bi-check2 me-2 text-success"></i>Use stop names like "28 May", "Narimanov", "Ganjlik", "Sahil", "Koroglu"</li>
             <li class="mb-2"><i class="bi bi-check2 me-2 text-success"></i>You can also enter area or district names</li>

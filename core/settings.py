@@ -30,6 +30,7 @@ DOWNLOADED_APPS = []
 MAIN_APPS = [
     'transport',
     'accounts',
+    'materials'
 ]
 
 INSTALLED_APPS = CORE_APPS + DOWNLOADED_APPS + MAIN_APPS

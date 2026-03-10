@@ -7,12 +7,12 @@
 <div class="page-header">
   <div class="container">
     <div class="d-flex align-items-center gap-2 mb-2">
-      <a href="{% url 'transport:home' %}" class="text-white-50 text-decoration-none small"><i class="bi bi-house me-1"></i>Home</a>
+      <a href="{% url 'transport:home' %}" class="text-white-50 text-decoration-none small"><i class="bi bi-house me-1"></i><span data-en="Home" data-az="Ana Səhifə">Home</span></a>
       <i class="bi bi-chevron-right text-white-50 small"></i>
-      <span class="text-white small">Stops</span>
+      <span class="text-white small" data-en="Stops" data-az="Dayanacaqlar">Stops</span>
     </div>
-    <h1 class="text-white mb-1"><i class="bi bi-geo-alt me-2"></i>Bus Stops</h1>
-    <p class="text-white-50 mb-0">Find stops across Baku's transport network</p>
+    <h1 class="text-white mb-1"><i class="bi bi-geo-alt me-2"></i><span data-en="Bus Stops" data-az="Avtobus Dayanacaqları">Bus Stops</span></h1>
+    <p class="text-white-50 mb-0" data-en="Find stops across Baku's transport network" data-az="Bakı nəqliyyat şəbəkəsindəki dayanacaqları tapın">Find stops across Baku's transport network</p>
   </div>
 </div>
 
@@ -24,15 +24,16 @@
       <form method="get">
         <div class="row g-2 align-items-end">
           <div class="col">
-            <label class="form-label small text-muted mb-1">Search stops</label>
+            <label class="form-label small text-muted mb-1" data-en="Search stops" data-az="Dayanacaq axtar">Search stops</label>
             <div class="input-group">
               <span class="input-group-text bg-transparent"><i class="bi bi-search"></i></span>
               <input type="text" name="q" value="{{ query }}" class="form-control"
+                     data-placeholder-en="Stop name or address…" data-placeholder-az="Dayanacaq adı və ya ünvanı…"
                      placeholder="Stop name or address…">
             </div>
           </div>
           <div class="col-auto">
-            <button type="submit" class="btn btn-primary">Search</button>
+            <button type="submit" class="btn btn-primary" data-en="Search" data-az="Axtar">Search</button>
             {% if query %}
             <a href="{% url 'transport:stop_list' %}" class="btn btn-outline-secondary ms-1">
               <i class="bi bi-x"></i>
@@ -91,9 +92,9 @@
   {% else %}
   <div class="empty-state">
     <div class="empty-state-icon"><i class="bi bi-geo-alt"></i></div>
-    <h5 class="fw-600">No stops found</h5>
-    <p class="text-muted">Try a different search term.</p>
-    <a href="{% url 'transport:stop_list' %}" class="btn btn-outline-primary">Clear Search</a>
+    <h5 class="fw-600" data-en="No stops found" data-az="Dayanacaq tapılmadı">No stops found</h5>
+    <p class="text-muted" data-en="Try a different search term." data-az="Fərqli axtarış termini sınayın.">Try a different search term.</p>
+    <a href="{% url 'transport:stop_list' %}" class="btn btn-outline-primary" data-en="Clear Search" data-az="Axtarışı Təmizlə">Clear Search</a>
   </div>
   {% endif %}
 
