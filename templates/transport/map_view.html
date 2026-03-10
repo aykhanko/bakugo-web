@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Live Map – BakuGo{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+<style>
+  #map { height: calc(100vh - 120px); min-height: 500px; }
+  .map-legend { position: absolute; bottom: 24px; right: 12px; z-index: 1000; }
+  #map-counter { position: absolute; top: 12px; left: 60px; z-index: 1000; }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header" style="padding: 1.5rem 0 1rem;">
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+      <div>
+        <h1 class="text-white mb-1 fs-3"><i class="bi bi-pin-map me-2"></i>Live Vehicle Map</h1>
+        <p class="text-white-50 mb-0 small">Real-time bus positions across Baku's transport network</p>
+      </div>
+      <div class="d-flex gap-2">
+        <button id="refresh-btn" class="btn btn-light btn-sm" onclick="refreshLocations()">
+          <i class="bi bi-arrow-clockwise me-1"></i>Refresh
+        </button>
+        <a href="{% url 'transport:route_list' %}" class="btn btn-outline-light btn-sm">
+          <i class="bi bi-signpost-2 me-1"></i>Routes
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="position-relative">
+  <div id="map"></div>
+
+  <!-- Counter badge -->
+  <div id="map-counter">
+    <div class="badge bg-white text-dark shadow-sm" style="font-size:.8rem;">
+      <i class="bi bi-bus-front text-primary me-1"></i>
+      <span id="vehicle-count">{{ vehicle_data|length }}</span> vehicles
+      &nbsp;|&nbsp;
+      <i class="bi bi-geo-alt text-success me-1"></i>
+      <span>{{ stop_data|length }}</span> stops
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="map-legend">
+    <div class="card shadow border-0 p-2" style="min-width:140px; font-size:.8rem;">
+      <div class="d-flex align-items-center gap-2 mb-2">
+        <div style="width:14px;height:14px;background:#f59e0b;border:2px solid white;border-radius:50%;"></div>
+        <span>Bus (active)</span>
+      </div>
+      <div class="d-flex align-items-center gap-2">
+        <div style="width:12px;height:12px;background:#0ea5e9;border:2px solid white;border-radius:50%;"></div>
+        <span>Stop</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script>
+const STOP_DATA = {{ stop_data|safe }};
+const VEHICLE_DATA = {{ vehicle_data|safe }};
+
+const map = L.map('map').setView([40.4093, 49.8671], 13);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap contributors',
+  maxZoom: 19,
+}).addTo(map);
+
+const stopIcon = L.divIcon({
+  className: '',
+  html: '<div style="width:10px;height:10px;background:#0ea5e9;border:2px solid white;border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,.25)"></div>',
+  iconSize: [10, 10],
+  iconAnchor: [5, 5],
+});
+
+const busIcon = L.divIcon({
+  className: '',
+  html: '<div style="width:26px;height:26px;background:#f59e0b;border:3px solid white;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.3);font-size:11px;line-height:1;">🚌</div>',
+  iconSize: [26, 26],
+  iconAnchor: [13, 13],
+});
+
+// Add stops
+STOP_DATA.forEach(s => {
+  L.marker([s.lat, s.lng], { icon: stopIcon })
+    .addTo(map)
+    .bindPopup(`<div style="min-width:140px"><b>${s.name}</b><br><small style="color:#64748b"><a href="/stops/${s.id}/">View Stop →</a></small></div>`);
+});
+
+// Add vehicles
+let vehicleMarkers = [];
+function addVehicleMarkers(data) {
+  vehicleMarkers.forEach(m => map.removeLayer(m));
+  vehicleMarkers = [];
+  data.forEach(v => {
+    const m = L.marker([v.lat, v.lng], { icon: busIcon })
+      .addTo(map)
+      .bindPopup(`
+        <div style="min-width:160px">
+          <p style="font-weight:700;margin:0 0 4px;color:#0ea5e9">Bus ${v.plate}</p>
+          <p style="margin:0 0 4px;font-size:.85rem"><b>Route ${v.route}</b></p>
+          <p style="margin:0;font-size:.8rem;color:#64748b">Speed: ${v.speed.toFixed(0)} km/h</p>
+        </div>
+      `);
+    vehicleMarkers.push(m);
+  });
+  document.getElementById('vehicle-count').textContent = data.length;
+}
+
+addVehicleMarkers(VEHICLE_DATA);
+
+// Refresh simulation: randomize positions slightly
+function refreshLocations() {
+  const btn = document.getElementById('refresh-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>Refreshing…';
+
+  setTimeout(() => {
+    const updated = VEHICLE_DATA.map(v => ({
+      ...v,
+      lat: v.lat + (Math.random() - .5) * .002,
+      lng: v.lng + (Math.random() - .5) * .003,
+      speed: Math.random() * 50,
+    }));
+    addVehicleMarkers(updated);
+    btn.disabled = false;
+    btn.innerHTML = '<i class="bi bi-arrow-clockwise me-1"></i>Refresh';
+  }, 800);
+}
+
+// Auto-refresh every 30 seconds
+setInterval(refreshLocations, 30000);
+</script>
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %}Bus Stops – BakuGo{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <div class="container">
+    <div class="d-flex align-items-center gap-2 mb-2">
+      <a href="{% url 'transport:home' %}" class="text-white-50 text-decoration-none small"><i class="bi bi-house me-1"></i>Home</a>
+      <i class="bi bi-chevron-right text-white-50 small"></i>
+      <span class="text-white small">Stops</span>
+    </div>
+    <h1 class="text-white mb-1"><i class="bi bi-geo-alt me-2"></i>Bus Stops</h1>
+    <p class="text-white-50 mb-0">Find stops across Baku's transport network</p>
+  </div>
+</div>
+
+<div class="container py-4">
+
+  <!-- Search -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <form method="get">
+        <div class="row g-2 align-items-end">
+          <div class="col">
+            <label class="form-label small text-muted mb-1">Search stops</label>
+            <div class="input-group">
+              <span class="input-group-text bg-transparent"><i class="bi bi-search"></i></span>
+              <input type="text" name="q" value="{{ query }}" class="form-control"
+                     placeholder="Stop name or address…">
+            </div>
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Search</button>
+            {% if query %}
+            <a href="{% url 'transport:stop_list' %}" class="btn btn-outline-secondary ms-1">
+              <i class="bi bi-x"></i>
+            </a>
+            {% endif %}
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Count -->
+  <div class="mb-3">
+    <p class="text-muted small mb-0">
+      <strong>{{ stops|length }}</strong> stop{{ stops|length|pluralize }} found
+      {% if query %} for "<strong>{{ query }}</strong>"{% endif %}
+    </p>
+  </div>
+
+  <!-- Stops Grid -->
+  {% if stops %}
+  <div class="row g-3">
+    {% for stop in stops %}
+    <div class="col-sm-6 col-lg-4">
+      <a href="{% url 'transport:stop_detail' stop.pk %}" class="text-decoration-none">
+        <div class="card stop-card h-100 p-3">
+          <div class="d-flex align-items-start gap-3">
+            <div class="stop-icon flex-shrink-0">
+              <i class="bi bi-geo-alt-fill"></i>
+            </div>
+            <div class="flex-grow-1 min-w-0">
+              <div class="fw-600 text-dark text-truncate">{{ stop.name }}</div>
+              {% if stop.address %}
+              <div class="text-muted small mt-1 text-truncate">
+                <i class="bi bi-map me-1"></i>{{ stop.address }}
+              </div>
+              {% endif %}
+              <div class="d-flex flex-wrap gap-1 mt-2">
+                {% if stop.code %}
+                <span class="badge rounded-pill text-bg-light small">{{ stop.code }}</span>
+                {% endif %}
+                {% if stop.has_shelter %}
+                <span class="badge rounded-pill" style="background:rgba(14,165,233,.1);color:var(--primary)">
+                  <i class="bi bi-house-door me-1"></i>Shelter
+                </span>
+                {% endif %}
+              </div>
+            </div>
+            <i class="bi bi-chevron-right text-muted flex-shrink-0"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <div class="empty-state-icon"><i class="bi bi-geo-alt"></i></div>
+    <h5 class="fw-600">No stops found</h5>
+    <p class="text-muted">Try a different search term.</p>
+    <a href="{% url 'transport:stop_list' %}" class="btn btn-outline-primary">Clear Search</a>
+  </div>
+  {% endif %}
+
+</div>
+{% endblock %}

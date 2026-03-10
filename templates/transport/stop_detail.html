@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ stop.name }} – Stop | BakuGo{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <div class="container">
+    <div class="d-flex align-items-center gap-2 mb-2">
+      <a href="{% url 'transport:home' %}" class="text-white-50 text-decoration-none small"><i class="bi bi-house me-1"></i>Home</a>
+      <i class="bi bi-chevron-right text-white-50 small"></i>
+      <a href="{% url 'transport:stop_list' %}" class="text-white-50 text-decoration-none small">Stops</a>
+      <i class="bi bi-chevron-right text-white-50 small"></i>
+      <span class="text-white small">{{ stop.name }}</span>
+    </div>
+    <div class="d-flex align-items-center gap-3 flex-wrap">
+      <div class="stop-icon flex-shrink-0" style="background:rgba(255,255,255,.15); color:white; width:52px; height:52px; font-size:1.5rem; border-radius:14px;">
+        <i class="bi bi-geo-alt-fill"></i>
+      </div>
+      <div>
+        <h1 class="text-white mb-1">{{ stop.name }}</h1>
+        <div class="d-flex flex-wrap gap-2">
+          {% if stop.code %}<span class="badge bg-white text-dark">{{ stop.code }}</span>{% endif %}
+          {% if stop.address %}<span class="text-white-50 small"><i class="bi bi-map me-1"></i>{{ stop.address }}</span>{% endif %}
+          {% if stop.has_shelter %}<span class="badge bg-white bg-opacity-25 text-white"><i class="bi bi-house-door me-1"></i>Shelter</span>{% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container py-4">
+  <div class="row g-4">
+
+    <!-- Routes at this stop -->
+    <div class="col-lg-4">
+      <div class="card shadow-sm mb-3">
+        <div class="card-body">
+          <h6 class="fw-700 mb-3"><i class="bi bi-signpost-2 me-2 text-primary"></i>Routes at this Stop</h6>
+          {% if route_stops %}
+          <div class="d-flex flex-column gap-2">
+            {% for rs in route_stops %}
+            <a href="{% url 'transport:route_detail' rs.route.pk %}" class="text-decoration-none">
+              <div class="card bg-light border-0 p-2 d-flex flex-row align-items-center gap-3">
+                <div class="route-badge flex-shrink-0" style="background: {{ rs.route.color }}; font-size:.85rem; min-width:42px; height:30px;">
+                  {{ rs.route.number }}
+                </div>
+                <div class="flex-grow-1 min-w-0">
+                  <div class="text-dark fw-500 small text-truncate">{{ rs.route.name }}</div>
+                  <div class="text-muted" style="font-size:.72rem;">Stop #{{ rs.order }}</div>
+                </div>
+                <i class="bi bi-chevron-right text-muted small"></i>
+              </div>
+            </a>
+            {% endfor %}
+          </div>
+          {% else %}
+          <p class="text-muted small mb-0">No routes currently serving this stop.</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Nearby vehicles -->
+      {% if nearby_vehicles %}
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h6 class="fw-700 mb-3">
+            <i class="bi bi-bus-front me-2 text-primary"></i>Nearby Vehicles
+          </h6>
+          <div class="d-flex flex-column gap-2">
+            {% for v in nearby_vehicles %}
+            <div class="d-flex align-items-center gap-2 p-2 rounded" style="background:var(--surface)">
+              <i class="bi bi-bus-front-fill text-warning fs-5"></i>
+              <div class="flex-grow-1">
+                <div class="fw-600 small">{{ v.plate_number }}</div>
+                <div class="text-muted" style="font-size:.78rem;">
+                  Route {{ v.route.number }}
+                  {% if v.location %} · {{ v.location.speed|floatformat:0 }} km/h{% endif %}
+                </div>
+              </div>
+              <span class="badge rounded-pill badge-{{ v.status }}">{{ v.get_status_display }}</span>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Map -->
+    <div class="col-lg-8">
+      <div class="card shadow-sm">
+        <div class="card-body p-0 overflow-hidden" style="border-radius: var(--radius);">
+          <div id="stop-map"></div>
+        </div>
+        <div class="card-footer bg-light border-0 px-3 py-2">
+          <small class="text-muted">
+            <i class="bi bi-geo me-1"></i>
+            Coordinates: {{ stop.latitude }}, {{ stop.longitude }}
+          </small>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script>
+(function() {
+  const lat = {{ stop.latitude }};
+  const lng = {{ stop.longitude }};
+
+  const map = L.map('stop-map').setView([lat, lng], 16);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors',
+    maxZoom: 19,
+  }).addTo(map);
+
+  const stopIcon = L.divIcon({
+    className: '',
+    html: '<div style="width:20px;height:20px;background:#0ea5e9;border:3px solid white;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.3)"></div>',
+    iconSize: [20, 20],
+    iconAnchor: [10, 10],
+  });
+
+  L.marker([lat, lng], { icon: stopIcon })
+    .addTo(map)
+    .bindPopup('<b>{{ stop.name }}</b>{% if stop.address %}<br><small>{{ stop.address }}</small>{% endif %}')
+    .openPopup();
+})();
+</script>
+{% endblock %}
