@@ -219,6 +219,13 @@ UNFOLD = {
                     {"title": "Favorite Stops", "icon": "star", "link": "/admin/transport/favoritestop/"},
                 ],
             },
+            {
+                "title": "Materials",
+                "separator": True,
+                "items": [
+                    {"title": "Project Materials", "icon": "folder_open", "link": "/admin/materials/projectmaterial/"},
+                ],
+            },
         ],
     },
 }

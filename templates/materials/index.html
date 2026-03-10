@@ -1,0 +1,319 @@
+{% load static %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, #1f2937 0%, #0f172a 45%, #020617 100%);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .materials-section {
+      width: 100%;
+      max-width: 900px;
+      text-align: center;
+    }
+
+    .title {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      max-width: 680px;
+      margin: 0 auto 48px;
+      color: #cbd5e1;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .plus-layout {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      height: 520px;
+      margin: 0 auto;
+    }
+
+    .material-card {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: rgba(255, 255, 255, 0.07);
+      box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.28),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      text-decoration: none;
+      color: #fff;
+      user-select: none;
+    }
+
+    .material-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.4),
+        0 0 0 10px rgba(255,255,255,0.03);
+      border-color: rgba(255,255,255,0.24);
+    }
+
+    .material-card .icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .material-card .icon svg {
+      width: 100%;
+      height: 100%;
+      fill: currentColor;
+    }
+
+    .material-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .material-card p {
+      font-size: 12px;
+      color: #cbd5e1;
+    }
+
+    .excel {
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #22c55e;
+    }
+
+    .excel:hover {
+      transform: translateX(-50%) translateY(-6px) scale(1.03);
+    }
+
+    .github {
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      color: #f8fafc;
+    }
+
+    .github:hover {
+      transform: translateY(-50%) translateY(-6px) scale(1.03);
+    }
+
+    .powerpoint {
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #f97316;
+    }
+
+    .powerpoint:hover {
+      transform: translateX(-50%) translateY(-6px) scale(1.03);
+    }
+
+    .pdf {
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      color: #ef4444;
+    }
+
+    .pdf:hover {
+      transform: translateY(-50%) translateY(-6px) scale(1.03);
+    }
+
+    .center-circle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 120px;
+      height: 120px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(59,130,246,0.28), rgba(168,85,247,0.2));
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+
+    .center-circle span {
+      font-size: 14px;
+      font-weight: 700;
+      color: #e2e8f0;
+      line-height: 1.4;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(15, 23, 42, 0.95);
+      color: #fff;
+      padding: 14px 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 14px;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+      z-index: 1000;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 640px) {
+      .plus-layout {
+        height: 420px;
+        max-width: 360px;
+      }
+
+      .material-card {
+        width: 110px;
+        height: 110px;
+        gap: 7px;
+      }
+
+      .material-card .icon {
+        width: 34px;
+        height: 34px;
+      }
+
+      .material-card h3 {
+        font-size: 13px;
+      }
+
+      .material-card p {
+        font-size: 10px;
+      }
+
+      .center-circle {
+        width: 90px;
+        height: 90px;
+      }
+
+      .center-circle span {
+        font-size: 11px;
+      }
+    }
+  </style>
+
+  <section class="materials-section">
+    <h1 class="title">Layihə Materialları</h1>
+
+    <div class="plus-layout">
+
+      {% if material %}
+      <a href="#" class="material-card excel" data-link="{{ material.get_excel_url }}" data-name="Excel">
+        <div class="icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8V3zm2 0v18h2a2 2 0 0 0 2-2V7l-4-4zM8.8 9l1.7 2.7L12.2 9H14l-2.5 3.9L14 16h-1.8l-1.7-2.8L8.8 16H7l2.5-3.1L7 9h1.8z"/>
+          </svg>
+        </div>
+        <h3>Excel</h3>
+        <p>Cədvəl faylı</p>
+      </a>
+
+      <a href="#" class="material-card github" data-link="{{ material.github_link }}" data-name="GitHub">
+        <div class="icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 .5C5.65.5.5 5.66.5 12.02c0 5.09 3.29 9.4 7.85 10.92.57.1.78-.25.78-.55 0-.27-.01-1-.02-1.96-3.19.7-3.86-1.54-3.86-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.97.1-.75.4-1.26.72-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.17a10.93 10.93 0 0 1 5.77 0c2.2-1.48 3.17-1.17 3.17-1.17.62 1.59.23 2.76.11 3.05.74.8 1.18 1.82 1.18 3.07 0 4.41-2.69 5.39-5.25 5.67.41.35.78 1.03.78 2.08 0 1.5-.01 2.71-.01 3.08 0 .3.2.66.79.55A11.52 11.52 0 0 0 23.5 12C23.5 5.66 18.34.5 12 .5z"/>
+          </svg>
+        </div>
+        <h3>GitHub</h3>
+        <p>Repo linki</p>
+      </a>
+
+      <a href="#" class="material-card powerpoint" data-link="{{ material.get_powerpoint_url }}" data-name="PowerPoint">
+        <div class="icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M13 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7V3zm2 0v18h3a2 2 0 0 0 2-2V7l-4-4zM9 8h3.2c1.92 0 3.3 1.07 3.3 2.95 0 1.9-1.38 3.05-3.3 3.05h-1.5V17H9V8zm1.7 1.45v3.1h1.2c1.07 0 1.72-.54 1.72-1.56 0-.98-.65-1.54-1.72-1.54h-1.2z"/>
+          </svg>
+        </div>
+        <h3>PowerPoint</h3>
+        <p>Təqdimat faylı</p>
+      </a>
+
+      <a href="#" class="material-card pdf" data-link="{{ material.get_pdf_url }}" data-name="PDF">
+        <div class="icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7l-5-5zm-5 14H7v-5h2.2c1.54 0 2.55.9 2.55 2.46C11.75 15.06 10.74 16 9 16zm-.18-1.44c.74 0 1.16-.38 1.16-1.1 0-.69-.42-1.05-1.16-1.05H8.6v2.15h.22zM13 16h-1.8v-5H13c1.72 0 2.94 1 2.94 2.49C15.94 15 14.72 16 13 16zm-.05-1.47h.04c.83 0 1.37-.36 1.37-1.04 0-.71-.54-1.02-1.37-1.02h-.04v2.06zM17.5 12.42H19V11h-3v5h1.5v-1.85H19v-1.37h-1.5v-.36z"/>
+          </svg>
+        </div>
+        <h3>PDF</h3>
+        <p>Sənəd faylı</p>
+      </a>
+      {% else %}
+      <p style="color:#94a3b8;text-align:center;">Hələ heç bir material əlavə edilməyib.</p>
+      {% endif %}
+    </div>
+  </section>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    const cards = document.querySelectorAll(".material-card");
+    const toast = document.getElementById("toast");
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2200);
+    }
+
+    cards.forEach(card => {
+      card.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        const link = this.dataset.link?.trim();
+        const name = this.dataset.name || "Material";
+
+        if (link) {
+          window.open(link, "_blank");
+        } else {
+          showToast(`${name} üçün hələ link əlavə edilməyib.`);
+        }
+      });
+    });
+  </script>
