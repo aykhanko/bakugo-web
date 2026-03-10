@@ -158,6 +158,21 @@ LOGOUT_REDIRECT_URL = '/'
 #########################################################
 '''UNFOLD ADMIN CONFIG'''
 
+from core.admin_permissions import (
+    permission_dashboard,
+    permission_transport_route,
+    permission_transport_stop,
+    permission_transport_vehicle,
+    permission_transport_vehiclelocation,
+    permission_auth_user,
+    permission_transport_favoriteroute,
+    permission_transport_favoritestop,
+    permission_materials_projectmaterial,
+    permission_section_transport,
+    permission_section_users,
+    permission_section_materials,
+)
+
 UNFOLD = {
     "SITE_TITLE": "BakuGo Admin",
     "SITE_HEADER": "BakuGo",
@@ -197,33 +212,36 @@ UNFOLD = {
                 "title": "Navigation",
                 "separator": True,
                 "items": [
-                    {"title": "Dashboard", "icon": "dashboard", "link": "/admin/"},
+                    {"title": "Dashboard", "icon": "dashboard", "link": "/admin/", "permission": permission_dashboard},
                 ],
             },
             {
                 "title": "Transport",
                 "separator": True,
+                "permission": permission_section_transport,
                 "items": [
-                    {"title": "Routes", "icon": "route", "link": "/admin/transport/route/"},
-                    {"title": "Stops", "icon": "location_on", "link": "/admin/transport/stop/"},
-                    {"title": "Vehicles", "icon": "directions_bus", "link": "/admin/transport/vehicle/"},
-                    {"title": "Vehicle Locations", "icon": "my_location", "link": "/admin/transport/vehiclelocation/"},
+                    {"title": "Routes", "icon": "route", "link": "/admin/transport/route/", "permission": permission_transport_route},
+                    {"title": "Stops", "icon": "location_on", "link": "/admin/transport/stop/", "permission": permission_transport_stop},
+                    {"title": "Vehicles", "icon": "directions_bus", "link": "/admin/transport/vehicle/", "permission": permission_transport_vehicle},
+                    {"title": "Vehicle Locations", "icon": "my_location", "link": "/admin/transport/vehiclelocation/", "permission": permission_transport_vehiclelocation},
                 ],
             },
             {
                 "title": "Users",
                 "separator": True,
+                "permission": permission_section_users,
                 "items": [
-                    {"title": "Users", "icon": "group", "link": "/admin/auth/user/"},
-                    {"title": "Favorite Routes", "icon": "favorite", "link": "/admin/transport/favoriteroute/"},
-                    {"title": "Favorite Stops", "icon": "star", "link": "/admin/transport/favoritestop/"},
+                    {"title": "Users", "icon": "group", "link": "/admin/auth/user/", "permission": permission_auth_user},
+                    {"title": "Favorite Routes", "icon": "favorite", "link": "/admin/transport/favoriteroute/", "permission": permission_transport_favoriteroute},
+                    {"title": "Favorite Stops", "icon": "star", "link": "/admin/transport/favoritestop/", "permission": permission_transport_favoritestop},
                 ],
             },
             {
                 "title": "Materials",
                 "separator": True,
+                "permission": permission_section_materials,
                 "items": [
-                    {"title": "Project Materials", "icon": "folder_open", "link": "/admin/materials/projectmaterial/"},
+                    {"title": "Project Materials", "icon": "folder_open", "link": "/admin/materials/projectmaterial/", "permission": permission_materials_projectmaterial},
                 ],
             },
         ],
